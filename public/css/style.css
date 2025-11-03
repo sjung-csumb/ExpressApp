@@ -135,6 +135,11 @@ footer, #footer{color:#e9eef6}
 	box-shadow: 0 10px 30px rgba(2,6,23,0.6);
 }
 
+.meal-card:focus{
+	outline: none;
+	box-shadow: 0 10px 30px rgba(2,6,23,0.6), 0 0 0 3px rgba(255,213,77,0.12);
+}
+
 @media (max-width: 480px){
 	.meal-card img{ height: 120px; }
 	.meal-title{ font-size: 0.95rem; }
