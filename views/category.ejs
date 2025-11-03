@@ -21,10 +21,10 @@
     <main class="page container my-5">
         <div class="meal-list">
         <% for(let meal of searchData.categories){ %>
-            <div class="meal-card">
+            <a class="meal-card" href="/searchByKeyword?keyword=<%= meal.strCategory %>">
                 <img src="<%= meal.strCategoryThumb %>" alt="<%= meal.strCategory %>">
                 <div class="meal-title"><%= meal.strCategory %></div>
-            </div>
+            </a>
         <% } %>
         </div>
     </main>

@@ -28,10 +28,10 @@
             <h3>No meals found. Please try another keyword.</h3>
         <% } else { %>
             <% for(let meal of searchData.meals){ %>
-                <div class="meal-card">
+                <a class="meal-card" href="/details?id=<%= meal.idMeal %>">
                     <img src="<%= meal.strMealThumb %>" alt="<%= meal.strMeal %>">
                     <div class="meal-title"><%= meal.strMeal %></div>
-                </div>
+                </a>
             <% } %>
         <% } %>
         </div>

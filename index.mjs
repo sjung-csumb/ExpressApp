@@ -98,6 +98,15 @@ app.get("/searchByKeyword", async(req, res) => {
 
     res.render('search.ejs',{searchData});
 });//searchByKeyword
+app.get("/details", async(req, res) => {
+    //Lookup full meal details by id
+    //www.themealdb.com/api/json/v1/1/lookup.php?i=52772
+    let searchUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + req.query.id;
+    let searchResponse = await fetch(searchUrl);
+    let searchData = await searchResponse.json();
+    console.log(searchData);
+    res.render('details.ejs',{searchData});
+});//details
 
 app.get("/searchByCategory", async(req, res) => {
     // List all meal categories
