@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <h1 class="text-center bg-danger p-5 text-white m-0">Recipe site</h1>
+    <!--Loading nav code. MUST USE - include("url") to inject the code.-->
+    <%- include("partials/navbar.ejs") %>
+
+    <main class="page container my-5">
+        <div class="meal-list">
+        <% for(let meal of searchData.categories){ %>
+            <div class="meal-card">
+                <img src="<%= meal.strCategoryThumb %>" alt="<%= meal.strCategory %>">
+                <div class="meal-title"><%= meal.strCategory %></div>
+            </div>
+        <% } %>
+        </div>
+    </main>
+    <%- include("partials/footer.ejs") %>
+    <script>
+
+        //Same functions as $(selector)
+        function $(selector){
+            return document.querySelector(selector);
+        }
+        const allCards = document.querySelectorAll(".meal-card");
+        for (let i=0; i<allCards.length; i++){
+            allCards[i].addEventListener("click", cardClick);
+        }
+        
+
+        async function cardClick(){
+            console.log(this);
+            let keyword = this.querySelector(".meal-title").innerText;
+            let url = "searchByKeyword?keyword=" + keyword;
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+            res.render("search.ejs", {searchData: data});
+            //$("#authorName").textContent = data[0].firstName + " "+ data[0].lastName;
+            //$("#authorImage").src = data[0].portrait;
+        }
+    </script>
+</body>
+
+<!--Additional Info.-->
+
+<!-- <script>
+    //npm i node-fetch  for install node-fetch which request multiple api set
+    fetch()
+
+</script> -->
+
+</html>

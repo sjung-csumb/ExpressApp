@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <h1 class="text-center bg-danger p-5 text-white m-0">Recipe site</h1>
+    <!--Loading nav code. MUST USE - include("url") to inject the code.-->
+    <%- include("partials/navbar.ejs") %>
+
+    <main class="page container my-5">
+        <form action="/searchByKeyword" method="GET">
+            <label for="keywordBtn">Keyword: <input type="text" name="keyword"></label>
+            <button id="keywordBtn" type="submit" class="btn btn-outline-success">SearchKeyword</button>
+        </form>
+        <div class="meal-list">
+        <%if(!searchData.meals){ %>
+            <h3>No meals found. Please try another keyword.</h3>
+        <% } else { %>
+            <% for(let meal of searchData.meals){ %>
+                <div class="meal-card">
+                    <img src="<%= meal.strMealThumb %>" alt="<%= meal.strMeal %>">
+                    <div class="meal-title"><%= meal.strMeal %></div>
+                </div>
+            <% } %>
+        <% } %>
+        </div>
+    </main>
+    <%- include("partials/footer.ejs") %>
+</body>
+
+<!--Additional Info.-->
+
+<!-- <script>
+    //npm i node-fetch  for install node-fetch which request multiple api set
+    fetch()
+
+</script> -->
+
+</html>
